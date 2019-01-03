@@ -23,8 +23,10 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //TODO private Difficulty difficulty (enumeration in jpa)
 
+    /* indicate this should be persisted to the database as a string value (i.e. hard), instead of 1 or 2 or 3 of the enum */
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 
     /* indicate one note per one recipe, changes from recipe cascade down to the note; this also indicates Recipe being
         the relationship owner via cascade
