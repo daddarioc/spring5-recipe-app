@@ -22,5 +22,6 @@ public class Ingredient {
     @ManyToOne // there may be many ingredients in a given recipe
     private Recipe recipe;
 
-    //TODO UnitOfMesaure one-to-one String
+    @OneToOne(mappedBy = "ingredient")   // an ingredient has one way to measure it
+    private UnitOfMeasure unitOfMeasure;
 }
