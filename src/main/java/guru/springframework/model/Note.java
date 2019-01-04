@@ -20,4 +20,9 @@ public class Note {
 
     @OneToOne   // only one note per one recipe
     private Recipe recipe;
+
+    @Override
+    public String toString() {
+        return recipeNote;
+    }
 }

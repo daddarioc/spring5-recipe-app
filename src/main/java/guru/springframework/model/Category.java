@@ -15,6 +15,6 @@ public class Category {
 
     private String description;
 
-    @ManyToMany(mappedBy = "categories") // a category can have any number of recipes
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories") // a category can have any number of recipes
     private Set<Recipe> recipe;
 }
