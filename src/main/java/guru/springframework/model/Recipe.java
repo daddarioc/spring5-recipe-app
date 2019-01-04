@@ -31,7 +31,7 @@ public class Recipe {
     /* indicate one note per one recipe, changes from recipe cascade down to the note; this also indicates Recipe being
         the relationship owner via cascade
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Note note;
 
     /* one recipe will have many ingredients; indicates Recipe is the relationship owner, changes persist to ingredients
@@ -40,6 +40,12 @@ public class Recipe {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredientSet;
+
+    @ManyToMany // a recipe can have any number of categories
+    @JoinTable(name = "recipe_category",
+        joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 
     @Lob // indicate that this may be larger than standard size
     private Byte[] image;

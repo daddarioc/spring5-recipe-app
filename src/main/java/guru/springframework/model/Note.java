@@ -16,7 +16,8 @@ public class Note {
     private Long id;
 
     @Lob    // indicates to Hibernate this will be larger than the standard 255 char string
-    @OneToOne   // there is one note for one recipe
-    private String note;
+    private String recipeNote;
 
+    @OneToOne   // only one note per one recipe
+    private Recipe recipe;
 }
