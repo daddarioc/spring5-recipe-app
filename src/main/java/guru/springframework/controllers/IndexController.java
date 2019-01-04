@@ -1,13 +1,16 @@
 package com.dadarioc.spring.recipe.controllers;
 
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Component
 public class IndexController {
 
     @RequestMapping({"", "/", "index"})
-    public String getIndexPage() {
+    public String getIndexPage(Model model) {
+        model.addAttribute("index");
+
         return "index";
     }
 }

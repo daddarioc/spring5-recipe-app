@@ -39,7 +39,7 @@ public class Recipe {
      */
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredientSet;
+    private Set<Ingredient> ingredients;
 
     @ManyToMany // a recipe can have any number of categories
     @JoinTable(name = "recipe_category",
