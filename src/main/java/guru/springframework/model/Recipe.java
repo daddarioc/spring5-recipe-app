@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *  Represents an recipe which is made up of ingredients, and has an accompanying note
+ *  Represents an recipe which is made up of ingredients, and has an accompanying notes
  */
 @Entity
 public class Recipe {
@@ -28,11 +28,11 @@ public class Recipe {
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
-    /* indicate one note per one recipe, changes from recipe cascade down to the note; this also indicates Recipe being
+    /* indicate one notes per one recipe, changes from recipe cascade down to the notes; this also indicates Recipe being
         the relationship owner via cascade
      */
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Note note;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Notes notes;
 
     /* one recipe will have many ingredients; indicates Recipe is the relationship owner, changes persist to ingredients
         and that the relationship is defined by the reference property "recipe" in the Ingredient object
@@ -55,9 +55,9 @@ public class Recipe {
         return this.description;
     }
 
-    public void setNotes(Note note) {
-        this.note = note;
-        note.setRecipe(this);
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+        notes.setRecipe(this);
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
@@ -138,12 +138,8 @@ public class Recipe {
         this.difficulty = difficulty;
     }
 
-    public Note getNote() {
-        return note;
-    }
-
-    public void setNote(Note note) {
-        this.note = note;
+    public Notes getNotes() {
+        return notes;
     }
 
     public Set<Ingredient> getIngredients() {

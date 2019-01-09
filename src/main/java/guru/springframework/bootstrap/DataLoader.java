@@ -167,12 +167,13 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         tacos.addIngredient(new Ingredient("sour cream, thinned with 1/4 cup milk", new BigDecimal(.5), uomCup));
         tacos.addIngredient(new Ingredient("lime, cut into wedges", new BigDecimal(1), uomEach));
 
-        Note tacoNote = new Note();
+        Notes tacoNote = new Notes();
         tacoNote.setRecipeNote("Look for ancho chile powder with the Mexican ingredients at your grocery store, on " +
                 "buy it online. (If you can't find ancho chili powder, you replace the ancho chili, the oregano, and " +
                 "the cumin with 2 1/2 tablespoons regular chili powder, though the flavor won't be quite the same.)");
         tacoNote.setRecipe(tacos);
 
+        tacos.setNotes(tacoNote);
 
         tacos.getCategories().add(catMexican);
         tacos.getCategories().add(catAmerican);
@@ -212,10 +213,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         guac.addIngredient(new Ingredient("grated black pepper", new BigDecimal(1), uomDash));
         guac.addIngredient(new Ingredient("tomato", new BigDecimal(1), uomEach));
 
-        Note guacNote = new Note();
+        Notes guacNote = new Notes();
         guacNote.setRecipeNote("Be careful handling chiles if using. Wash your hands thoroughly after handling and " +
                 "do not touch your eyes or the area near your eyes with your hands for several hours.");
-        guac.setNote(guacNote);
+        guac.setNotes(guacNote);
         guac.getCategories().add(catMexican);
 
         recipes.add(guac);
