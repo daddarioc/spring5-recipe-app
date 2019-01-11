@@ -19,9 +19,7 @@ public class IndexController {
     private UnitOfMeasureRepository unitOfMeasureRepository;
     private RecipeService recipeService;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository, RecipeService recipeService) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
@@ -29,7 +27,7 @@ public class IndexController {
     public String getIndexPage(Model model) {
         log.debug("Index page requested; adding the 'recipes' attribute to the model...");
         // add the attribute "owners" to the model, which represents all the owners from the service
-        model.addAttribute("recipes", recipeService.findAll());
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }
