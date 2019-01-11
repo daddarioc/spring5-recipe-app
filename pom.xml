@@ -25,6 +25,10 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
 		<!-- initial dependencies after fork -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

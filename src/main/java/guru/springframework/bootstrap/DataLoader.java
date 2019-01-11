@@ -4,9 +4,11 @@ import guru.springframework.model.*;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private RecipeRepository recipeRepository;
@@ -27,6 +30,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     @Override
+    @Transactional  // directs Spring framework to create a transaction around this method; will prevent seeming random exception
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
     }
@@ -34,7 +38,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private List<Recipe> getRecipes() {
 
         // get the units of measure
-
+        log.info("Checking units of measure...");
         Optional<UnitOfMeasure> optionalEach = unitOfMeasureRepository.findByDescription("Each");
         if (optionalEach.isPresent() == false) {
             throw new RuntimeException("UoM not found");
@@ -76,6 +80,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         }
 
         // set local UoM
+        log.info("Setting units of measure...");
         UnitOfMeasure uomEach = optionalEach.get();
         UnitOfMeasure uomTeaspoon = optionalTeaspoon.get();
         UnitOfMeasure uomTablespoon = optionalTablespoon.get();
@@ -87,6 +92,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         // get and set categories
 
+        log.info("Preparing categories...");
         Optional<Category> optionalAmerican = categoryRepository.findByDescription("American");
         if (optionalAmerican.isPresent() == false){
             throw new RuntimeException("Category not found");
@@ -115,6 +121,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         List<Recipe> recipes = new ArrayList<Recipe>();
 
         // assemble tacos
+        log.info("Generating recipe...");
         Recipe tacos = new Recipe();
 
         tacos.setDescription("Spicy Grilled Chicken Tacos Recipe");
@@ -180,8 +187,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
 
         recipes.add(tacos);
+        log.info("Recipe added...");
 
         // assemble guacamole
+        log.info("Generating recipe...");
         Recipe guac = new Recipe();
 
         guac.setPrepTime(10);
@@ -220,6 +229,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         guac.getCategories().add(catMexican);
 
         recipes.add(guac);
+        log.info("Recipe added...");
 
         return recipes;
 

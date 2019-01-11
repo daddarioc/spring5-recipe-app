@@ -1,10 +1,13 @@
 package guru.springframework.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 /**
  * Class that represents a note for a given recipe
  */
+@Data
 @Entity
 public class Notes {
 
@@ -18,32 +21,4 @@ public class Notes {
     @OneToOne   // only one note per one recipe
     private Recipe recipe;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRecipeNote() {
-        return recipeNote;
-    }
-
-    public void setRecipeNote(String recipeNote) {
-        this.recipeNote = recipeNote;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-    @Override
-    public String toString() {
-        return recipeNote;
-    }
 }
