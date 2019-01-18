@@ -89,6 +89,15 @@
 
 	<build>
 		<plugins>
+			<!-- add surefire plugin for junit 5 -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+				<configuration>
+					<useSystemClassLoader>false</useSystemClassLoader>
+					<forkCount>0</forkCount>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -105,7 +114,7 @@
 						<additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
 					</additionalClasspathElements>
 					<parallel>none</parallel>
-					<forkCount>0</forkCount>
+
 				</configuration>
 				<executions>
 					<execution>
