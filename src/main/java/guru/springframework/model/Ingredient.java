@@ -1,7 +1,6 @@
 package guru.springframework.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,7 +9,10 @@ import java.math.BigDecimal;
  * Class represents an ingredient in a recipe
  */
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"recipe"})
 public class Ingredient {
 

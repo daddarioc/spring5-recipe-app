@@ -1,6 +1,9 @@
 package guru.springframework.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -8,7 +11,10 @@ import javax.persistence.*;
  * Class represents how an ingredient object is measured
  */
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UnitOfMeasure {
 
     @Id

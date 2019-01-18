@@ -1,7 +1,6 @@
 package guru.springframework.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -9,7 +8,10 @@ import java.util.Set;
 /**
  * Represents a category in the database
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @EqualsAndHashCode(exclude = {"recipe"})
 public class Category {

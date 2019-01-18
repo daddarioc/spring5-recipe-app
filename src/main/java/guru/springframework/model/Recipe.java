@@ -1,6 +1,9 @@
 package guru.springframework.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,7 +13,10 @@ import java.util.Set;
  *  Represents an recipe which is made up of ingredients, and has an accompanying notes
  */
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Recipe {
 
     @Id
