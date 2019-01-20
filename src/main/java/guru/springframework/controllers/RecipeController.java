@@ -22,6 +22,7 @@ public class RecipeController {
         log.debug("in /recipe/show controller method");
         model.addAttribute("recipe", service.getRecipeById(id));
 
+
         return "recipe/show";
     }
 
