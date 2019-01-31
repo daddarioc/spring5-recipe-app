@@ -1,10 +1,13 @@
 package guru.springframework.services;
 
+import guru.springframework.converters.RecipeCommandToRecipe;
+import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.model.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -20,9 +23,16 @@ import static org.mockito.Mockito.*;
 public class RecipeServiceTest {
 
     @Mock
-    RecipeRepository repository;
+    RecipeRepository recipeRepository;
 
-    RecipeService service;
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @InjectMocks
+    RecipeServiceImpl recipeService;
 
     Set<Recipe> recipes = new HashSet<>();
 
@@ -31,7 +41,7 @@ public class RecipeServiceTest {
         recipes.add(new Recipe().builder().id(1L).description("recipe 1").build());
         recipes.add(new Recipe().builder().id(2L).description("recipe 2").build());
 
-        service = new RecipeService(repository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -39,22 +49,22 @@ public class RecipeServiceTest {
         final Long id = 3L;
         Recipe recipe = new Recipe().builder().id(id).description("new recipe").build();
 
-        when(repository.findById(anyLong())).thenReturn(Optional.of(recipe));
+        when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipe));
 
-        Recipe newRecipe = service.getRecipeById(id);
+        Recipe newRecipe = recipeService.findById(id);
 
         assertNotNull("Returned null", newRecipe);
         assertEquals(id, newRecipe.getId());
-        verify(repository, times(1)).findById(id);
+        verify(recipeRepository, times(1)).findById(id);
     }
 
     @Test
     public void getRecipesTest() {
-        when(repository.findAll()).thenReturn(recipes);
+        when(recipeRepository.findAll()).thenReturn(recipes);
 
-        Set<Recipe> retrievedRecipes = service.getRecipes();
+        Set<Recipe> retrievedRecipes = recipeService.getRecipes();
 
         assertEquals(2, retrievedRecipes.size());
-        verify(repository, times(1)).findAll();
+        verify(recipeRepository, times(1)).findAll();
     }
 }

@@ -35,7 +35,7 @@ class RecipeControllerTest {
 
     @Test
     void showById() throws Exception {
-        when(service.getRecipeById(anyLong())).thenReturn(recipe);
+        when(service.findById(anyLong())).thenReturn(recipe);
 
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
@@ -44,6 +44,6 @@ class RecipeControllerTest {
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
 
-        verify(service, times(1)).getRecipeById(id);
+        verify(service, times(1)).findById(id);
     }
 }
