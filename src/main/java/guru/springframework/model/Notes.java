@@ -22,7 +22,7 @@ public class Notes {
     private Long id;
 
     @Lob    // indicates to Hibernate this will be larger than the standard 255 char string
-    private String recipeNote;
+    private String recipeNotes;
 
     @OneToOne   // only one note per one recipe
     private Recipe recipe;

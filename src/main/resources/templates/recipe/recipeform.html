@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create Recipe</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Basic Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label>Description:</label>
+                                <input type="text" class="form-control" th:field="*{description}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>Prep Time:</label>
+                                <input type="text" class="form-control" th:field="*{prepTime}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Cook time:</label>
+                                <input type="text" class="form-control" th:field="*{cookTime}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Difficulty:</label>
+                                <select class="form-control">
+                                    <option>option 1</option>
+                                    <option>option 2</option>
+                                    <option>option 3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>Servings:</label>
+                                <input type="text" class="form-control" th:field="*{servings}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Source:</label>
+                                <input type="text" class="form-control" th:field="*{source}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>URL:</label>
+                                <input type="text" class="form-control" th:field="*{url}"/>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <label>Categories:</label>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input">category 1
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input">category 2
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input">category 3
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Ingredients</h2>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li th:remove="all">Ingredient 1</li>
+                            <li th:remove="all">Ingredient 2</li>
+                            <li th:each="ingredient : ${recipe.ingredients}"
+                                th:text="${(ingredient.getAmount()) + ' ' + (ingredient.unitOfMeasure.getDescription()) + ' - ' + (ingredient.getDescription())}">
+                                Ingredient 3
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Directions</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <textarea rows=10 class="form-control" th:field="*{directions}">Directions</textarea>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Notes</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <textarea rows=5 class="form-control" th:field="*{notes.recipeNotes}">Notes</textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+            </form>
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+</body>
+</html>
