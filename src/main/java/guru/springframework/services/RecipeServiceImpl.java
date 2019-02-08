@@ -73,4 +73,5 @@ public class RecipeServiceImpl implements RecipeService {
         log.debug("Deleting record with id: " + l);
         recipeRepository.deleteById(l);
     }
+
 }
