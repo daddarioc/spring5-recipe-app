@@ -33,20 +33,27 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Description</th>
-                                <th>Amount</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
                             </thead>
-                            <tr>
+                            <tr th:remove="all">
                                 <td th:text="${ingredient.id}">123</td>
                                 <td th:text="${ingredient.description}">ingredient 1</td>
-                                <td th:text="${ingredient.amount} + ' ' + ${ingredient.unitOfMeasure.description}">2
-                                    cups
-                                </td>
                                 <td><a href="#">Update</a></td>
                                 <td><a href="#">Delete</a></td>
-
+                            </tr>
+                            <tr th:remove="all">
+                                <td th:text="${ingredient.id}">12333</td>
+                                <td th:text="${ingredient.description}">ingredient 2</td>
+                                <td><a href="#">Update</a></td>
+                                <td><a href="#">Delete</a></td>
+                            </tr>
+                            <tr>
+                                <td th:text="${ingredient.id}">334</td>
+                                <td th:text="${ingredient.amount} + ' ' + ${ingredient.unitOfMeasure.description} + ' - ' + ${ingredient.description}">ingredient 3</td>
+                                <td><a href="#" th:href="@{'/ingredients/' + ${ingredient.id} + '/update'}">Update</a></td>
+                                <td><a href="#" th:href="@{'/ingredients/' + ${ingredient.id} + '/delete'}">Delete</a></td>
                             </tr>
                         </table>
                     </div>

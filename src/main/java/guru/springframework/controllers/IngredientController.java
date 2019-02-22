@@ -36,6 +36,8 @@ public class IngredientController {
                                        Model model) {
 
         model.addAttribute("ingredient", ingredientService.findByRecipeIdandIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
+        model.addAttribute("recipe", recipeService.findById(Long.valueOf(recipeId)));
+
         return "recipe/ingredients/show";
     }
 }
