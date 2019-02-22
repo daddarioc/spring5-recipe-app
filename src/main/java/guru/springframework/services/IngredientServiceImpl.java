@@ -19,6 +19,14 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
+    public IngredientCommand save(IngredientCommand ingredientCommand) {
+
+
+
+        return null;
+    }
+
+    @Override
     public IngredientCommand findByRecipeIdandIngredientId(Long recipeId, Long ingredientId) {
 
         Recipe recipeCommand = recipeService.findById(recipeId);
